@@ -39,11 +39,18 @@ $headers = @{
     Authorization = "Bearer $accessToken"
 }
 
-# 2) Query users (NOTE: no pagination yet — OK for small labs)
+# 2) Query users (pagination)
 $apiUrl = "https://graph.microsoft.com/v1.0/users?`$select=displayName,userPrincipalName,businessPhones,mobilePhone&`$top=999"
 
-$response = Invoke-RestMethod -Method Get -Uri $apiUrl -Headers $headers
-$users = @($response.value)
+$users = New-Object System.Collections.Generic.List[object]
+
+while ($null -ne $apiUrl) {
+    $response = Invoke-RestMethod -Method Get -Uri $apiUrl -Headers $headers
+    foreach ($u in @($response.value)) { [void]$users.Add($u) }
+    $apiUrl = $response.'@odata.nextLink'
+}
+
+Write-Host "Fetched users: $($users.Count)"
 
 # 3) Audit: missing phone
 $report = $users | Where-Object {
@@ -56,3 +63,4 @@ $report | Export-Csv -Path $outFile -NoTypeInformation -Encoding UTF8
 
 
 Write-Host "OK. Users analyzed: $($users.Count). Missing phone: $($report.Count). Output: $outFile"
+
