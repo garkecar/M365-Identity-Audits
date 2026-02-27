@@ -19,9 +19,9 @@ function Assert-EnvVar {
     return $value
 }
 
-$tenantID = "YOUR_TENANT_ID"
-$clientID = "YOUR_CLIENT_ID"
-$clientSecret = "YOUR_CLIENT_SECRET"
+$tenantID     = Assert-EnvVar -Name "TENANT_ID"
+$clientID     = Assert-EnvVar -Name "CLIENT_ID"
+$clientSecret = Assert-EnvVar -Name "CLIENT_SECRET"
 
 # 1) Get access token (client credentials)
 $tokenBody = @{
@@ -53,5 +53,6 @@ $report = $users | Where-Object {
 # 4) Export
 $outFile = "Auditoria_Usuarios_Sin_Telefono.csv"
 $report | Export-Csv -Path $outFile -NoTypeInformation -Encoding UTF8
+
 
 Write-Host "OK. Users analyzed: $($users.Count). Missing phone: $($report.Count). Output: $outFile"
