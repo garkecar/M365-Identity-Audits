@@ -34,3 +34,15 @@ In PowerShell:
 $env:TENANT_ID="YOUR_TENANT_ID"
 $env:CLIENT_ID="YOUR_CLIENT_ID"
 $env:CLIENT_SECRET="YOUR_CLIENT_SECRET_VALUE"
+
+## Enterprise Features
+- **Pagination Support**: The script automatically follows `@odata.nextLink` to fetch all users in the tenant, bypassing the default 100-user limit.
+- **Environment Variable Auth**: No hardcoded secrets. Uses `Assert-EnvVar` to ensure the environment is correctly configured before execution.
+
+## Roadmap / Future Improvements
+- [ ] **Throttling Handling**: Implement retry logic for `HTTP 429` (Too Many Requests) responses.
+- [ ] **Advanced Filtering**: Use `$filter` on the server-side to reduce data transfer (requires `ConsistencyLevel: eventual`).
+- [ ] **Azure Key Vault Integration**: Fetch secrets directly from a secure vault instead of environment variables.
+
+## License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
