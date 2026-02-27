@@ -1,0 +1,16 @@
+# Reportes de salida (Datos sensibles)
+*.csv
+*.xlsx
+*.log
+
+# Archivos temporales de sistema
+.DS_Store
+Thumbs.db
+
+# Archivos de configuración local (donde podrías tener secrets)
+.env
+*.local
+secrets.ps1
+
+# Carpetas de VS Code
+.vscode/
