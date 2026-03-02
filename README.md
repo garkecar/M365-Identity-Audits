@@ -42,7 +42,7 @@ Never hardcode secrets. These scripts are designed to fetch credentials from you
 $env:TENANT_ID="YOUR_TENANT_ID"
 $env:CLIENT_ID="YOUR_CLIENT_ID"
 $env:CLIENT_SECRET="YOUR_CLIENT_SECRET_VALUE"
-
+```
 ##  Security Best Practices
 - Least Privilege: Only grant the specific permissions required for each script.
 - Secret Management: For production environments, it is highly recommended to use Azure Key Vault and Managed Identities instead of environment variables.
