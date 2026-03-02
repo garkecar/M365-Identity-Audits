@@ -38,7 +38,7 @@ To run these scripts, you must register an application in your Microsoft Entra a
 ### 2. Environment Variables
 Never hardcode secrets. These scripts are designed to fetch credentials from your local environment:
 
-powershell
+```powershell
 $env:TENANT_ID="YOUR_TENANT_ID"
 $env:CLIENT_ID="YOUR_CLIENT_ID"
 $env:CLIENT_SECRET="YOUR_CLIENT_SECRET_VALUE"
